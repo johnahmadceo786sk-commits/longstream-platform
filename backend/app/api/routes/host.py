@@ -1,7 +1,7 @@
 from app.workers.tasks import process_video
 import os
 
-from backend.app.database.models import video
+from app.database.models import video
 
 process_video.delay(video.id, "/path/to/uploaded/file")
 

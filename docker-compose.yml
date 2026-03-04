@@ -47,13 +47,13 @@ services:
 volumes:
   postgres_data:
 
-  worker:
-    build: ./backend
-    container_name: longstream_worker
-    command: celery -A app.workers.celery_app.celery worker --loglevel=info
-    depends_on:
-      - backend
-      - redis
-      - postgres
-    env_file:
-      - .env
+worker:
+  build: ./backend
+  container_name: longstream_worker
+  command: celery -A app.workers.celery_app.celery worker --loglevel=info
+  depends_on:
+    - backend
+    - redis
+    - postgres
+  env_file:
+    - .env

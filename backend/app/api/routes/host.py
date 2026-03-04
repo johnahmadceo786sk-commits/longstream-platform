@@ -9,10 +9,3 @@ from app.workers.tasks import process_video
 
 router = APIRouter()
 
-@router.post("/upload")
-async def upload_video(
-    title: str,
-    file: UploadFile = File(...),
-    db: Session = Depends(get_db),
-):
-    return {"message": "Upload endpoint working"}

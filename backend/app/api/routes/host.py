@@ -1,6 +1,6 @@
 from fastapi import APIRouter, UploadFile, File, Depends
 from sqlalchemy.orm import Session
-from app.dependencies import get_db
+import os
 
 router = APIRouter()
 

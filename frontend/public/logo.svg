@@ -1,0 +1,13 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+
+  <rect width="200" height="200" rx="20" fill="#0f172a"/>
+
+  <circle cx="100" cy="100" r="60" fill="#1e293b"/>
+
+  <polygon points="85,70 140,100 85,130" fill="#38bdf8"/>
+
+  <text x="100" y="180" font-size="18" fill="white" text-anchor="middle" font-family="Arial">
+    LongStream
+  </text>
+
+</svg>

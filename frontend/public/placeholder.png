@@ -1,9 +1,19 @@
-# generate_placeholder.py
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
-img = Image.new("RGB", (640, 360), "#1e293b")
+width, height = 640, 360
+
+img = Image.new("RGB", (width, height), "#1e293b")
 draw = ImageDraw.Draw(img)
 
-draw.text((250,170), "Video", fill="white")
+text = "Video"
+
+font = ImageFont.load_default()
+
+text_width, text_height = draw.textsize(text, font=font)
+
+x = (width - text_width) // 2
+y = (height - text_height) // 2
+
+draw.text((x, y), text, fill="white", font=font)
 
 img.save("placeholder.png")

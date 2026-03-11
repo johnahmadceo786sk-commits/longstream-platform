@@ -14,3 +14,4 @@ python-multipart==0.0.9
 boto3==1.34.82
 ffmpeg-python==0.2.0
 websockets==12.0
+Pillow==

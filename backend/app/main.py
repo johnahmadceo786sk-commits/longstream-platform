@@ -1,29 +1,28 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import APIRouter, UploadFile, File
+import os
 
-from app.api.routes import auth, host, public, search, stream, download
+router = APIRouter()
 
-app = FastAPI(
-    title="LongStream Platform",
-    version="1.0.0"
-)
+UPLOAD_DIR = "videos"
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-app.include_router(auth.router, prefix="/auth", tags=["Auth"])
-app.include_router(host.router, prefix="/host", tags=["Host"])
-app.include_router(public.router, prefix="/public", tags=["Public"])
-app.include_router(search.router, prefix="/search", tags=["Search"])
-app.include_router(stream.router, prefix="/stream", tags=["Stream"])
-app.include_router(download.router, prefix="/download", tags=["Download"])
+os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 
-@app.get("/")
-def health_check():
-    return {"status": "LongStream running"}
+@router.get("/dashboard")
+def host_dashboard():
+    return {"message": "Host dashboard"}
+
+
+@router.post("/upload")
+async def upload_video(file: UploadFile = File(...)):
+
+    file_path = f"{UPLOAD_DIR}/{file.filename}"
+
+    with open(file_path, "wb") as buffer:
+        content = await file.read()
+        buffer.write(content)
+
+    return {
+        "message": "Video uploaded successfully",
+        "filename": file.filename
+    }
